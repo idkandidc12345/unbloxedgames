@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unbloxed Games</title>
     <style>
-        /* Base Reset & Background */
+        /* Base Reset & Background styling */
         * {
             margin: 0;
             padding: 0;
@@ -15,129 +15,231 @@
         }
 
         body {
-            background: #000000; /* Pure Black Background */
+            background: #000000; /* Pure Matte Black Base */
             color: #fff;
             min-height: 100vh;
             padding: 2rem;
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        /* Apple Glassmorphism Styling with Dark/Yellow Accents */
+        /* Ambient Orbs Decorating Home Menu Background */
+        body::before, body::after {
+            content: '';
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, rgba(0,0,0,0) 70%);
+            z-index: -2;
+            pointer-events: none;
+        }
+        body::before { top: -10%; left: -10%; }
+        body::after { bottom: 5%; right: -10%; }
+
+        /* Dynamic Floating Background Particles */
+        .ambient-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background: 
+                radial-gradient(1px 1px at 10% 20%, rgba(212, 175, 55, 0.4) 100%, transparent 0),
+                radial-gradient(1.5px 1.5px at 50% 40%, rgba(255, 255, 255, 0.15) 100%, transparent 0),
+                radial-gradient(2px 2px at 80% 15%, rgba(212, 175, 55, 0.3) 100%, transparent 0),
+                radial-gradient(1px 1px at 30% 80%, rgba(255, 255, 255, 0.2) 100%, transparent 0),
+                radial-gradient(2px 2px at 70% 70%, rgba(212, 175, 55, 0.4) 100%, transparent 0);
+            background-size: 40% 40%;
+            animation: driftParticles 40s linear infinite;
+        }
+
+        @keyframes driftParticles {
+            from { background-position: 0% 0%; }
+            to { background-position: 100% 100%; }
+        }
+
+        /* Premium Apple Glassmorphic UI Paneling */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
             border-radius: 24px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+            box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.6);
+            transition: border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
         }
 
-        /* Header & Search Bar */
+        /* Home Header Layout */
         header {
             width: 100%;
             max-width: 1200px;
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            margin-bottom: 1.8rem;
+        }
+
+        .site-logo {
+            height: 4rem;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.3));
+            animation: pulseLogo 4s ease-in-out infinite;
+        }
+
+        @keyframes pulseLogo {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.04); filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.5)); }
         }
 
         h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.5px;
-            background: linear-gradient(180deg, #ffffff 0%, #facc15 100%); /* White to Yellow Gradient */
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            background: linear-gradient(180deg, #ffffff 30%, #d4af37 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
         }
 
+        /* Input Deck Frame */
         .search-container {
-            max-width: 500px;
+            max-width: 520px;
             margin: 0 auto;
             position: relative;
         }
 
         .search-bar {
             width: 100%;
-            padding: 14px 24px;
-            font-size: 1rem;
+            padding: 16px 24px 16px 58px;
+            font-size: 1.05rem;
             color: #fff;
             outline: none;
-            border: 1px solid rgba(250, 204, 21, 0.3); /* Soft Yellow Border */
-            transition: all 0.3s ease;
+            border-radius: 50px; /* Pillow oval modern styling */
+            border: 1px solid rgba(212, 175, 55, 0.25);
         }
 
         .search-bar::placeholder {
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.35);
         }
 
         .search-bar:focus {
-            background: rgba(250, 204, 21, 0.05);
-            border-color: #facc15; /* Bright Yellow Focus */
-            box-shadow: 0 0 15px rgba(250, 204, 21, 0.2);
+            background: rgba(212, 175, 55, 0.04);
+            border-color: #d4af37;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.25), inset 0 0 10px rgba(212, 175, 55, 0.1);
         }
 
-        /* Games Grid */
+        .search-icon-svg {
+            position: absolute;
+            left: 22px;
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke: rgba(212, 175, 55, 0.5);
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            pointer-events: none;
+            transition: stroke 0.3s ease, transform 0.3s ease;
+        }
+
+        .search-bar:focus + .search-icon-svg {
+            stroke: #d4af37;
+            transform: scale(1.1);
+        }
+
+        /* Centralized Showcase Catalog Layout grid */
         .games-grid {
             width: 100%;
             max-width: 1200px;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 2rem;
+            gap: 2.5rem;
             padding: 10px;
         }
 
-        /* Game Card */
+        /* Home Showcase Card Decoration */
         .game-card {
             cursor: pointer;
             overflow: hidden;
-            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease, border-color 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 1.5rem;
+            padding: 1.8rem 1.5rem;
             text-align: center;
+            position: relative;
+        }
+
+        /* Embedded soft interior border lines for cards */
+        .game-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            padding: 1px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(0,0,0,0));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
         }
 
         .game-card:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.07);
-            border-color: #facc15; /* Bright Yellow Border on Hover */
-            box-shadow: 0 12px 40px 0 rgba(250, 204, 21, 0.15);
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(212, 175, 55, 0.7);
+            box-shadow: 0 15px 45px 0 rgba(212, 175, 55, 0.15), inset 0 0 15px rgba(212, 175, 55, 0.05);
         }
 
         .game-thumbnail {
-            width: 120px;
-            height: 120px;
+            width: 125px;
+            height: 125px;
             object-fit: contain;
-            border-radius: 18px;
-            margin-bottom: 1.2rem;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 10px;
+            border-radius: 20px;
+            margin-bottom: 1.4rem;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .game-card:hover .game-thumbnail {
+            transform: scale(1.08) rotate(2deg);
         }
 
         .game-title {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 600;
-            color: #ffffff;
-            transition: color 0.2s ease;
+            color: rgba(255, 255, 255, 0.9);
+            transition: color 0.3s ease;
         }
 
         .game-card:hover .game-title {
-            color: #facc15; /* Title switches to yellow on hover */
+            color: #d4af37;
         }
 
-        /* No Results Message */
         .no-results {
             display: none;
             font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.5);
-            margin-top: 3rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 4rem;
+            letter-spacing: 0.5px;
         }
 
-        /* Modal Overlay */
+        /* ================= DECORATED THEATER MODAL OVERLAY ================= */
         .modal {
             display: none;
             position: fixed;
@@ -145,78 +247,50 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9); /* Matte Black Backdrop */
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            background: radial-gradient(circle at center, rgba(15, 13, 5, 0.98) 0%, rgba(0, 0, 0, 1) 100%);
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 30px;
+            gap: 40px;
         }
 
-        /* Main Game Containment Box */
+        /* Theater Backdrop Aurora Glow Rings */
+        .modal::before {
+            content: '';
+            position: absolute;
+            width: 70vw;
+            height: 60vh;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.09) 0%, rgba(0, 0, 0, 0) 70%);
+            filter: blur(50px);
+            pointer-events: none;
+            z-index: -1;
+            animation: dynamicNeonPulse 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes dynamicNeonPulse {
+            0% { transform: scale(0.9) translate(-20px, -10px); opacity: 0.8; }
+            100% { transform: scale(1.1) translate(20px, 10px); opacity: 1; }
+        }
+
+        /* Central Stage Container Box */
         .modal-content {
-            width: 100%;
-            max-width: 1000px;
-            height: 85vh;
+            width: 62%;
+            height: 82vh;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            border: 1px solid rgba(250, 204, 21, 0.3); /* Subtle yellow frame tint */
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95), 0 0 40px rgba(212, 175, 55, 0.08);
+            border-radius: 28px;
         }
 
-        /* Control Bar */
-        .control-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 24px;
-            background: rgba(0, 0, 0, 0.6);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .control-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s ease;
-        }
-
-        .control-btn:hover {
-            background: #ffffff;
-            color: #000000; /* Crisp color inversion */
-            border-color: #ffffff;
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
-        }
-
-        .control-btn.close-style {
-            background: rgba(250, 204, 21, 0.1);
-            border-color: rgba(250, 204, 21, 0.3);
-            color: #facc15;
-        }
-
-        .control-btn.close-style:hover {
-            background: #facc15;
-            color: #000000;
-            border-color: #facc15;
-            box-shadow: 0 4px 12px rgba(250, 204, 21, 0.3);
-        }
-
-        /* Wrapper to keep iframe scaling nicely */
         .iframe-container {
             flex-grow: 1;
             width: 100%;
-            height: 100%;
-            background: #000;
+            height: calc(100% - 65px);
+            background: #050505;
+            position: relative;
         }
 
         iframe {
@@ -224,14 +298,132 @@
             height: 100%;
             border: none;
         }
+
+        /* Inside Controls Banner Header */
+        .control-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px;
+            background: linear-gradient(to bottom, rgba(15, 15, 15, 0.95) 0%, rgba(5, 5, 5, 0.95) 100%);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            height: 65px;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.85);
+            padding: 10px 20px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.3px;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .control-btn:hover {
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.25);
+        }
+
+        .control-btn.close-style {
+            background: rgba(212, 175, 55, 0.06);
+            border-color: rgba(212, 175, 55, 0.35);
+            color: #d4af37;
+        }
+
+        .control-btn.close-style:hover {
+            background: #d4af37;
+            color: #000000;
+            border-color: #d4af37;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* OUTSIDE FLANK COLUMNS (Decorated Side Panels) */
+        .flank-column {
+            width: 90px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            justify-content: center;
+            align-items: center;
+            height: 82vh;
+            position: relative;
+        }
+
+        /* Side panel background trace accent lines */
+        .flank-column::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, rgba(212, 175, 55, 0.2), transparent);
+            z-index: -1;
+        }
+        #leftFlank::before { right: -20px; }
+        #rightFlank::before { left: -20px; }
+
+        /* Icon-Only Card Node Grid Design */
+        .mini-flank-card {
+            width: 78px;
+            height: 78px;
+            background: rgba(10, 10, 10, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+        }
+
+        .mini-flank-card:hover {
+            background: rgba(212, 175, 55, 0.05);
+            border-color: #d4af37;
+            transform: scale(1.15) rotate(index % 2 === 0 ? 3deg : -3deg);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
+        }
+
+        .mini-flank-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .mini-flank-card:hover .mini-flank-thumb {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
 
+    <!-- Stars Drifting Matrix Effect -->
+    <div class="ambient-particles"></div>
+
     <header>
-        <h1>Unbloxed Games</h1>
+        <div class="brand-container">
+            <img src="https://venngage-wordpress.s3.amazonaws.com/uploads/2022/09/meme_this_is_fine_dog.png" alt="Logo" class="site-logo">
+            <h1>Unbloxed Games</h1>
+        </div>
         <div class="search-container">
             <input type="text" id="searchBar" class="search-bar glass-panel" placeholder="Search games..." onkeyup="searchGames()">
+            <svg class="search-icon-svg" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
         </div>
     </header>
 
@@ -243,7 +435,7 @@
         </div>
 
         <div class="game-card glass-panel" data-title="fnaf1" onclick="openGame('https://1games.io/game/fnaf-1/')">
-            <img src="https://play-lh.googleusercontent.com/myJ2kwywsCRglKkZuHBq6Aku9PX7HB75v-8KbnTK9JOPU6z0hpD9xtvjiTGqrn-e4eI" alt="Slope 3D" class="game-thumbnail">
+            <img src="https://play-lh.googleusercontent.com/myJ2kwywsCRglKkZuHBq6Aku9PX7HB75v-8KbnTK9JOPU6z0hpD9xtvjiTGqrn-e4eI" alt="FNAF 1" class="game-thumbnail">
             <div class="game-title">Five Nights At Freddys 1</div>
         </div>
 
@@ -258,100 +450,105 @@
         </div>
         
         <div class="game-card glass-panel" data-title="jsr" onclick="openGame('https://game.azgame.io/jetski-race/')">
-            <img src="https://sloperider.org/data/image/game/jetski-race.png" alt="Brain Lines" class="game-thumbnail">
+            <img src="https://sloperider.org/data/image/game/jetski-race.png" alt="JetSki Race" class="game-thumbnail">
             <div class="game-title">JetSki Race</div>
         </div>
 
         <div class="game-card glass-panel" data-title="xmas" onclick="openGame('https://freegames.org/games/xmas-wheelie/v1/')">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOq3sDo48ZuLMwbJ5ymkqQ3J1kn9uTfbkeNQ&s" alt="Brain Lines" class="game-thumbnail">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOq3sDo48ZuLMwbJ5ymkqQ3J1kn9uTfbkeNQ&s" alt="XMAS Wheelie" class="game-thumbnail">
             <div class="game-title">XMAS Wheelie</div>
         </div>
 
         <div class="game-card glass-panel" data-title="maze" onclick="openGame('https://freegames.org/games/fill-maze/v1/')">
-            <img src="data:image/jpeg;base64,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" alt="Brain Lines" class="game-thumbnail">
+            <img src="https://geometrydashlite2.io/data/image/game/melon-sandbox/melon-sandbox.png" alt="Fill Maze" class="game-thumbnail">
             <div class="game-title">Fill Maze</div>
         </div>
 
          <div class="game-card glass-panel" data-title="wbwwb" onclick="openGame('https://freegames.org/games/we-become-what-we-behold/v5/')">
-            <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=1200,height=1200,fit=cover,f=png/a0929e5428c5af2666c9eeb3a0441d4c/we-become-what-we-behold-logo.png" alt="Brain Lines" class="game-thumbnail">
+            <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=1200,height=1200,fit=cover,f=png/a0929e5428c5af2666c9eeb3a0441d4c/we-become-what-we-behold-logo.png" alt="We Become What We Behold" class="game-thumbnail">
             <div class="game-title">We Become What We Behold</div>
         </div>
 
         <div class="game-card glass-panel" data-title="bo" onclick="openGame('https://gacembed.withgoogle.com/blob-opera?isFirstSession=true')">
-            <img src="https://blob-opera.com/wp-content/uploads/2025/10/Blob-Opera.webp" alt="Brain Lines" class="game-thumbnail">
+            <img src="https://blob-opera.com/wp-content/uploads/2025/10/Blob-Opera.webp" alt="Blob Opera" class="game-thumbnail">
             <div class="game-title">Blob Opera</div>
         </div>
 
         <div class="game-card glass-panel" data-title="ss" onclick="openGame('https://gamecollections.me/game/3kh0-assets-main/subway-surfers/')">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkIz7xsze8hbzM6J4jMOf8hQo_uFIJL2va6w&s" alt="Brain Lines" class="game-thumbnail">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkIz7xsze8hbzM6J4jMOf8hQo_uFIJL2va6w&s" alt="Subway Surfers" class="game-thumbnail">
             <div class="game-title">Subway Surfers</div>
         </div>
 
         <div class="game-card glass-panel" data-title="smh" onclick="openGame('https://stickman.pro/iframe/index.html')">
-            <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=1200,height=1200,fit=cover,f=png/99e090d154caf30f3625df7e456d5984/stickman-hook-logo.png" alt="Brain Lines" class="game-thumbnail">
+            <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=1200,height=1200,fit=cover,f=png/99e090d154caf30f3625df7e456d5984/stickman-hook-logo.png" alt="Stickman Hook" class="game-thumbnail">
             <div class="game-title">Stickman Hook</div>
         </div>
 
          <div class="game-card glass-panel" data-title="bss" onclick="openGame('https://games.arcadrome.com/basketball-superstars/1/index.html?mp_assets=https%3A%2F%2Fs2.minijuegosgratis.com%2F&mp_embed=0&mp_game_id=252078&mp_game_uid=basketball-superstars&mp_game_url=https%3A%2F%2Fwww.miniplay.com%2Fgame%2Fbasketball-superstars&mp_int=1&mp_locale=en_US&mp_player_type=IFRAME&mp_site_https_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_site_name=miniplay.com&mp_site_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_timezone=Europe%2FDublin&mp_view_type=')">
-            <img src="https://www.kizgame.com/thumbs/basketball-superstars_1.webp" alt="Brain Lines" class="game-thumbnail">
+            <img src="https://www.kizgame.com/thumbs/basketball-superstars_1.webp" alt="BasketBall Superstars" class="game-thumbnail">
             <div class="game-title">BasketBall Superstars</div>
         </div>
 
         <div class="game-card glass-panel" data-title="sm" onclick="openGame('https://slicemaster.net/slice-master/index.html')">
-            <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=204,height=204,fit=cover,f=auto/743089b5c6b4dda8bd05d920ab00a0b3/slice-master-logo.png" alt="Brain Lines" class="game-thumbnail">
+            <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=204,height=204,fit=cover,f=auto/743089b5c6b4dda8bd05d920ab00a0b3/slice-master-logo.png" alt="Slice Master" class="game-thumbnail">
             <div class="game-title">Slice Master</div>
         </div>
 
         <div class="game-card glass-panel" data-title="em" onclick="openGame('https://d21u3ic0kp9e91.cloudfront.net/elasticman/0/index.html')">
-            <img src="https://lovemoneygame.io/data/image/Elastic-Man.jpg" alt="Brain Lines" class="game-thumbnail">
+            <img src="https://lovemoneygame.io/data/image/Elastic-Man.jpg" alt="Elastic Man" class="game-thumbnail">
             <div class="game-title">Elastic Man</div>
         </div>
 
          <div class="game-card glass-panel" data-title="bb" onclick="openGame('https://blockblast-2.io/game/block-blast/')">
-            <img src="https://imgs.crazygames.com/block-puzzle-master_1x1/20250924025352/block-puzzle-master_1x1-cover?format=auto&quality=100&metadata=none&width=1200" alt="Brain Lines" class="game-thumbnail">
+            <img src="https://imgs.crazygames.com/block-puzzle-master_1x1/20250924025352/block-puzzle-master_1x1-cover?format=auto&quality=100&metadata=none&width=1200" alt="Block Blast" class="game-thumbnail">
             <div class="game-title">Block Blast</div>
         </div>
 
          <div class="game-card glass-panel" data-title="mc" onclick="openGame('https://sd592g.github.io/zj684od4lfg/')">
-            <img src="https://store-images.s-microsoft.com/image/apps.21661.14216416494490173.9772fa78-5a01-45ce-9b9e-6ec61a10f4e2.f787fea4-1e7a-4458-a112-c5ac10fec5c0" alt="Brain Lines" class="game-thumbnail">
+            <img src="https://store-images.s-microsoft.com/image/apps.21661.14216416494490173.9772fa78-5a01-45ce-9b9e-6ec61a10f4e2.f787fea4-1e7a-4458-a112-c5ac10fec5c0" alt="MineCraft" class="game-thumbnail">
             <div class="game-title">MineCraft</div>
         </div>
 
          <div class="game-card glass-panel" data-title="hppyw" onclick="openGame('https://happy-wheels-online.github.io/file/')">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7_nCRqt-3u-b8JPIN2I6rlTVCzUlBxXyFEA&s" alt="Brain Lines" class="game-thumbnail">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7_nCRqt-3u-b8JPIN2I6rlTVCzUlBxXyFEA&s" alt="Happy Wheels" class="game-thumbnail">
             <div class="game-title">Happy Wheels</div>
         </div>
 
          <div class="game-card glass-panel" data-title="msand" onclick="openGame('https://melonplayground.io/game/melon-playground/')">
-            <img src="https://geometrydashlite2.io/data/image/game/melon-sandbox/melon-sandbox.png" alt="Brain Lines" class="game-thumbnail">
+            <img src="https://geometrydashlite2.io/data/image/game/melon-sandbox/melon-sandbox.png" alt="Melon Sandbox" class="game-thumbnail">
             <div class="game-title">Melon Sandbox</div>
         </div>
 
         <div class="game-card glass-panel" data-title="wordle" onclick="openGame('https://bosorioo.github.io/wordle-unlimited/')">
-            <img src="https://static01.nyt.com/images/2022/03/02/crosswords/alpha-wordle-icon-new/alpha-wordle-icon-new-smallSquare252-v3.png?format=pjpg&quality=75&auto=webp&disable=upscale" alt="Brain Lines" class="game-thumbnail">
+            <img src="https://static01.nyt.com/images/2022/03/02/crosswords/alpha-wordle-icon-new/alpha-wordle-icon-new-smallSquare252-v3.png?format=pjpg&quality=75&auto=webp&disable=upscale" alt="Wordle" class="game-thumbnail">
             <div class="game-title">Wordle</div>
         </div>
 
           <div class="game-card glass-panel" data-title="fnin" onclick="openGame('https://www.coolmathgames.com/sites/default/files/public_games/50823/?gd_sdk_referrer_url=https%3A%2F%2Fwww.coolmathgames.com%2F0-fruit-ninja')">
-            <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=1200,height=1200,fit=cover,f=png/c4dc286c30b8fbde45a0b5d4fe6f2146/fruit-ninja-logo.png" alt="Brain Lines" class="game-thumbnail">
+            <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=1200,height=1200,fit=cover,f=png/c4dc286c30b8fbde45a0b5d4fe6f2146/fruit-ninja-logo.png" alt="Fruit Ninja" class="game-thumbnail">
             <div class="game-title">Fruit Ninja</div>
         </div>
 
         <div class="game-card glass-panel" data-title="gran" onclick="openGame('https://grannyfree.io/play/granny/')">
-            <img src="https://static.wikia.nocookie.net/roblox-granny/images/7/7f/2025_Granny_Remodel_Icon.png/revision/latest/scale-to-width-down/250?cb=20250727013800" alt="Brain Lines" class="game-thumbnail">
+            <img src="https://static.wikia.nocookie.net/roblox-granny/images/7/7f/2025_Granny_Remodel_Icon.png/revision/latest/scale-to-width-down/250?cb=20250727013800" alt="Granny 1" class="game-thumbnail">
             <div class="game-title">Granny 1</div>
         </div>
 
          <div class="game-card glass-panel" data-title="rleage" onclick="openGame('https://rocketgoal.io/')">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Rocket_League_coverart.jpg" alt="Brain Lines" class="game-thumbnail">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Rocket_League_coverart.jpg" alt="Rocket League" class="game-thumbnail">
             <div class="game-title">Rocket League</div>
         </div>
     </main>
     <div id="noResults" class="no-results">No games found matching your search.</div>
 
+    <!-- Active Theater Sandbox Layer -->
     <div class="modal" id="gameModal">
+        
+        <!-- Left Side Flank Network -->
+        <div class="flank-column" id="leftFlank"></div>
+
+        <!-- Center Interactive Cabinet -->
         <div class="modal-content glass-panel">
-             
             <div class="control-bar">
                 <button class="control-btn close-style" onclick="closeGame()">
                     ← Back to Menu
@@ -360,16 +557,51 @@
                     ⛶ Full Screen
                 </button>
             </div>
-
             <div class="iframe-container" id="iframeContainer">
                 <iframe id="gameFrame" src="" allowfullscreen></iframe>
             </div>
-
         </div>
+
+        <!-- Right Side Flank Network -->
+        <div class="flank-column" id="rightFlank"></div>
+        
     </div>
 
     <script>
-        // Open game modal
+        // Catalog collection assembly
+        const gameItems = Array.from(document.querySelectorAll('#gamesGrid .game-card')).map(card => ({
+            title: card.getAttribute('data-title'),
+            name: card.querySelector('.game-title').innerText,
+            thumb: card.querySelector('.game-thumbnail').src,
+            url: card.getAttribute('onclick').match(/'([^']+)'/)[1]
+        }));
+
+        const leftContainer = document.getElementById('leftFlank');
+        const rightContainer = document.getElementById('rightFlank');
+
+        // Loop array data configuration nodes across columns
+        gameItems.forEach((game, index) => {
+            if (index >= 12) return; 
+            
+            const card = document.createElement('div');
+            card.className = 'mini-flank-card glass-panel';
+            card.title = game.name;
+            card.onclick = () => openGame(game.url);
+            
+            const img = document.createElement('img');
+            img.src = game.thumb;
+            img.className = 'mini-flank-thumb';
+            img.alt = game.name;
+            
+            card.appendChild(img);
+
+            if (index < 6) {
+                leftContainer.appendChild(card);
+            } else {
+                rightContainer.appendChild(card);
+            }
+        });
+
         function openGame(url) {
             const modal = document.getElementById('gameModal');
             const frame = document.getElementById('gameFrame');
@@ -377,30 +609,28 @@
             modal.style.display = 'flex';
         }
 
-        // Close game window (Back to Home Menu)
         function closeGame() {
             const modal = document.getElementById('gameModal');
             const frame = document.getElementById('gameFrame');
             
-            // Exit fullscreen if active when leaving game
             if (document.fullscreenElement) {
                 document.exitFullscreen();
             }
 
-            frame.src = ''; // Kill frame processes / sound
+            frame.src = ''; 
             modal.style.display = 'none';
         }
 
-        // Native Browser Fullscreen Controller
+        // Fullscreen configuration map
         function toggleFullScreen() {
             const container = document.getElementById('iframeContainer');
             
             if (!document.fullscreenElement) {
                 if (container.requestFullscreen) {
                     container.requestFullscreen();
-                } else if (container.webkitRequestFullscreen) { /* Safari */
+                } else if (container.webkitRequestFullscreen) {
                     container.webkitRequestFullscreen();
-                } else if (container.msRequestFullscreen) { /* IE11 */
+                } else if (container.msRequestFullscreen) {
                     container.msRequestFullscreen();
                 }
             } else {
@@ -410,7 +640,6 @@
             }
         }
 
-        // Real-time search filter function
         function searchGames() {
             const input = document.getElementById('searchBar').value.toLowerCase();
             const cards = document.getElementsByClassName('game-card');
